@@ -1,3 +1,1 @@
-# Noreply@expensely.*
-
-Resource to add no-reply
+# SES expensely.app

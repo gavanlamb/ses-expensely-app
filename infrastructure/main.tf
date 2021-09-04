@@ -1,25 +1,19 @@
-﻿resource "aws_ses_domain_identity" "app" {
-  domain = var.app_domain
+﻿module "ses" {
+  source = "trussworks/ses-domain/aws"
+  route53_zone_id = data.aws_route53_zone.main.zone_id
+
+  domain_name = var.domain
+  enable_verification = true
+
+  enable_incoming_email = false
+
+  dmarc_p = "reject"
+  dmarc_rua = var.dmarc_address
+
+  enable_spf_record = true
+
+  mail_from_domain = "mail.${var.domain}"
+  from_addresses = var.from_addresses
+  ses_rule_set = var.domain
 }
 
-resource "aws_route53_record" "app" {
-  zone_id = data.aws_route53_zone.app.zone_id
-  name    = "_amazonses.${var.app_domain}"
-  type    = "TXT"
-  ttl     = "600"
-  records = [join("", aws_ses_domain_identity.app.*.verification_token)]
-}
-
-resource "aws_ses_domain_dkim" "app_dkim" {
-  domain = join("", aws_ses_domain_identity.app.*.domain)
-}
-
-resource "aws_route53_record" "app_record" {
-  count = 3
-
-  zone_id = data.aws_route53_zone.app.zone_id
-  name    = "${element(aws_ses_domain_dkim.app_dkim.dkim_tokens, count.index)}._domainkey.${var.app_domain}"
-  type    = "CNAME"
-  ttl     = "600"
-  records = ["${element(aws_ses_domain_dkim.app_dkim.dkim_tokens, count.index)}.dkim.amazonses.com"]
-}

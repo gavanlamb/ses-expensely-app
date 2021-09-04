@@ -5,15 +5,12 @@ variable "region" {
   type = string
 }
 
-variable "app_domain" {
+variable "domain" {
   type = string
 }
-
-locals {
-  default_tags = {
-    Application = "Expensely"
-    Team = "Expensely Core"
-    ManagedBy = "Terraform"
-    Environment = var.environment
-  }
+variable "dmarc_address" {
+  type = string
+}
+variable "from_addresses" {
+  type = list(string)
 }
