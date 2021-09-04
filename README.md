@@ -1,1 +1,3 @@
-# email-no-reply
+# Noreply@expensely.*
+
+Resource to add no-reply
