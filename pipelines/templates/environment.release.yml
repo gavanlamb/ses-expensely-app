@@ -26,7 +26,7 @@ jobs:
           serviceConnectionName: ${{ parameters.serviceConnectionName }}
           stateBucketName: ${{ parameters.stateBucketName }}
           stateLockTableName: ${{ parameters.stateLockTableName }}
-          workspaceName: expensely-io-${{ parameters.environment }}
+          workspaceName: expensely-app-ses-${{ parameters.environment }}
   - template: job/approve.yml@templates
     parameters:
       dependsOn: plan
