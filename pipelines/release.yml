@@ -31,7 +31,7 @@ stages:
     variables:
       - template: variables/preview.ap-southeast-2.yml@expensely-templates
     jobs:
-      - template: templates/release.environment.yml
+      - template: templates/environment.release.yml
         parameters:
           environment: ${{ variables.environment }}
           serviceConnectionName: ${{ variables.terraformServiceConnectionName }}
@@ -45,7 +45,7 @@ stages:
     variables:
       - template: variables/production.ap-southeast-2.yml@expensely-templates
     jobs:
-      - template: templates/release.environment.yml
+      - template: templates/environment.release.yml
         parameters:
           environment: ${{ variables.environment }}
           serviceConnectionName: ${{ variables.terraformServiceConnectionName }}
