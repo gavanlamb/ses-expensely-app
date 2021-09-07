@@ -29,7 +29,7 @@ stages:
     displayName: Preview
     dependsOn: []
     variables:
-      - template: variables/preview.ap-southeast-2.yml@expensely-templates
+      - template: variables/preview.us-east-1.yml@expensely-templates
     jobs:
       - template: templates/environment.release.yml
         parameters:
@@ -43,7 +43,7 @@ stages:
     displayName: Production
     dependsOn: []
     variables:
-      - template: variables/production.ap-southeast-2.yml@expensely-templates
+      - template: variables/production.us-east-1.yml@expensely-templates
     jobs:
       - template: templates/environment.release.yml
         parameters:
