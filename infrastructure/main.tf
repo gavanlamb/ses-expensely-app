@@ -59,6 +59,15 @@ data "aws_iam_policy_document" "ses_s3_puts" {
   }
 }
 
+resource "aws_ses_configuration_set" "ses" {
+  name = "expensely-${lower(var.environment)}"
+  reputation_metrics_enabled = true
+  sending_enabled = true
+  delivery_options {
+    tls_policy = "Require"
+  }
+}
+
 resource "aws_s3_bucket" "ses" {
   bucket = var.ses_bucket
   acl = "private"
